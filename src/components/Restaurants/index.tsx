@@ -4,7 +4,7 @@ import { RestaurantsDataProps } from '../../types'
 import Card from '../Card'
 import { RestaurantsContainer } from './styles'
 
-const Restaurantes = () => {
+export const Restaurantes = () => {
   const [data, setData] = useState<RestaurantsDataProps[]>([])
   const [loading, setLoading] = useState(true)
 

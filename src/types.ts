@@ -1,4 +1,4 @@
-export interface MenuDataProps {
+export interface MenuItem {
   id: number
   nome: string
   descricao: string
@@ -7,7 +7,7 @@ export interface MenuDataProps {
   preco: number
 }
 
-export interface RestaurantsDataProps {
+export interface Restaurant {
   id: number
   titulo: string
   avaliacao: string
@@ -15,5 +15,5 @@ export interface RestaurantsDataProps {
   tipo: string
   descricao: string
   capa: string
-  cardapio: MenuDataProps[]
+  cardapio: MenuItem[]
 }

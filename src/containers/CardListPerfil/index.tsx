@@ -1,8 +1,10 @@
 import { useParams } from 'react-router-dom'
-import { getRestaurantById } from '../../services/api'
-import { MenuDataProps } from '../../types'
+import { useEffect, useState } from 'react'
+import { MenuItem, Restaurant } from '../../types'
 import { Container } from '../../global/globalStyles'
 import Card from '../../components/Card'
+import Modal from '../../components/Modal'
+
 import {
   BannerContainer,
   CardListContainer,
@@ -11,8 +13,6 @@ import {
   TextMessage,
   Title
 } from './styles'
-import Modal from '../../components/Modal'
-import { useState } from 'react'
 
 export const formataDescricao = (products: string) => {
   const limiteCaracteres = 150
@@ -24,15 +24,36 @@ export const formataDescricao = (products: string) => {
 
 const CardListPerfil = () => {
   const { id } = useParams()
-  const restaurant = id ? getRestaurantById(parseInt(id)) : undefined
 
-  const [selectedProduct, setSelectedProduct] = useState<MenuDataProps | null>(
-    null
-  )
+  const [restaurant, setRestaurant] = useState<Restaurant | null>(null)
+  const [selectedProduct, setSelectedProduct] = useState<MenuItem | null>(null)
 
   const closeModal = () => setSelectedProduct(null)
 
-  function renderProductList(products: MenuDataProps[]) {
+  useEffect(() => {
+    if (!id) return
+
+    const fetchData = async () => {
+      try {
+        const res = await fetch(
+          'https://api-ebac.vercel.app/api/efood/restaurantes'
+        )
+        const data = await res.json()
+
+        const restaurantFound = data.find(
+          (item: Restaurant) => item.id === parseInt(id)
+        )
+
+        setRestaurant(restaurantFound)
+      } catch (error) {
+        console.error('Erro ao buscar restaurante:', error)
+      }
+    }
+
+    fetchData()
+  }, [id])
+
+  function renderProductList(products: MenuItem[]) {
     if (!products || products.length === 0) {
       return (
         <TextMessage>
@@ -48,7 +69,7 @@ const CardListPerfil = () => {
         kindButton="button"
         nameButton="Mais detalhes"
         title={product.nome}
-        description={product.descricao}
+        description={formataDescricao(product.descricao)}
         cover={product.foto}
         handleClick={() => setSelectedProduct(product)}
       />

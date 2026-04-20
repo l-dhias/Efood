@@ -1,10 +1,10 @@
 import { Container } from '../../global/globalStyles'
-import { MenuDataProps } from '../../types'
+import { MenuItem } from '../../types'
 import { Overlay, ModalContent } from './styles'
 import close from '../../assets/images/close.png'
 
 interface ModalProps {
-  product: MenuDataProps | null
+  product: MenuItem | null
   onClose: () => void
 }
 

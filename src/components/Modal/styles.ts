@@ -22,10 +22,20 @@ export const ModalContent = styled.div`
   display: flex;
   gap: 20px;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    display: flex;
     flex-direction: column;
     width: 90%;
     overflow-y: auto;
+    margin: 0 auto;
+  }
+
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    overflow-y: auto;
+    margin: 0 auto;
   }
 
   img {
@@ -34,7 +44,7 @@ export const ModalContent = styled.div`
     object-fit: cover;
     flex-shrink: 0;
 
-    @media (max-width: 768px) {
+    @media (max-width: ${theme.breakpoints.tablet}) {
       width: 100%;
       height: 200px;
     }
@@ -59,6 +69,7 @@ export const ModalContent = styled.div`
     color: ${theme.Colors.text};
     border: none;
     padding: 10px 20px;
+    cursor: pointer;
   }
 
   .close {
@@ -71,5 +82,12 @@ export const ModalContent = styled.div`
     font-size: 18px;
     border: none;
     cursor: pointer;
+
+    @media (max-width: ${theme.breakpoints.tablet}) {
+      width: 14px;
+      height: 14px;
+      top: 8px;
+      right: 8px;
+    }
   }
 `

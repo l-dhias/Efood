@@ -25,7 +25,8 @@ export const Container = styled.div`
   width: 100%;
   margin: 0 auto;
 
-  @media screen and (max-width: ${theme.breakpoints.mobile}) {
+  @media screen and (max-width: ${theme.breakpoints.tablet}) {
+    max-width: 80%;
     display: flex;
     flex-direction: column;
     gap: 72px;

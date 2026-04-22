@@ -2,6 +2,8 @@ import { Container } from '../../global/globalStyles'
 import { MenuItem } from '../../types'
 import { Overlay, ModalContent } from './styles'
 import close from '../../assets/images/close.png'
+import { add } from '../../store/reducers/carrinho'
+import { useDispatch } from 'react-redux'
 
 interface ModalProps {
   product: MenuItem | null
@@ -9,7 +11,13 @@ interface ModalProps {
 }
 
 const Modal = ({ product, onClose }: ModalProps) => {
-  if (!product) return null // 🔥 ESSENCIAL
+  const dispatch = useDispatch()
+
+  const addAoCarrinho = () => {
+    dispatch(add(product!))
+  }
+
+  if (!product) return null
 
   return (
     <Overlay onClick={onClose}>
@@ -21,7 +29,7 @@ const Modal = ({ product, onClose }: ModalProps) => {
             <p>{product.descricao}</p>
             <p>Serve de: {product.porcao}</p>
 
-            <button>
+            <button onClick={addAoCarrinho}>
               Adicionar ao Carrinho - R$ {product.preco.toFixed(2)}
             </button>
 

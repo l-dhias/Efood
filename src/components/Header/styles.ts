@@ -27,6 +27,14 @@ export const HeaderComponent = styled.header`
     left: 50%;
     transform: translateX(-50%);
     top: 40px;
+
+    @media (max-width: ${theme.breakpoints.mobile}) {
+      width: 135px;
+      height: 68px;
+      flex-direction: column;
+      padding: 5px;
+      text-align: center;
+    }
   }
 `
 
@@ -35,6 +43,18 @@ export const HeaderProductComponent = styled(HeaderComponent)`
   justify-content: space-between;
   align-items: center;
   padding: 20px 170px;
+
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    flex-direction: row;
+    padding: 20px;
+    text-align: center;
+  }
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    width: 100%;
+    flex-direction: column;
+    padding: 5px;
+    text-align: center;
+  }
 `
 
 export const HeaderContent = styled.div`

@@ -7,9 +7,18 @@ import {
   Titulo
 } from './styles'
 import { useLocation } from 'react-router-dom'
+import { abrir } from '../../store/reducers/carrinho'
+import { useDispatch, useSelector } from 'react-redux'
+import type { RootReducer } from '../../store'
 
 const Header = () => {
   const { pathname } = useLocation()
+  const dispatch = useDispatch()
+  const { itens } = useSelector((state: RootReducer) => state.carrinho)
+
+  const abrirCarrinho = () => {
+    dispatch(abrir())
+  }
 
   return pathname === '/' ? (
     <HeaderComponent>
@@ -26,7 +35,9 @@ const Header = () => {
       <Link to="/">
         <img src={logo} alt="Logo" />
       </Link>
-      <Link to="/">0 produto(s) no carrinho</Link>
+      <Link to="#" onClick={abrirCarrinho}>
+        {itens.length} produto(s) no carrinho
+      </Link>
     </HeaderProductComponent>
   )
 }

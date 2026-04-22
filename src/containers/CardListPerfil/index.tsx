@@ -95,7 +95,11 @@ const CardListPerfil = () => {
         </Container>
       </ContainerListPerfil>
 
-      <Modal product={selectedProduct} onClose={closeModal} />
+      <Modal
+        visivel={!!selectedProduct}
+        product={selectedProduct}
+        onClose={closeModal}
+      />
     </>
   )
 }
